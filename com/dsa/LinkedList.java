@@ -5,6 +5,14 @@ public class LinkedList<E extends Comparable<E>> {
 	Node<E> head = null;
 	int count = 0;
 
+	public LinkedList(Node<E> head2) {
+		this.head = head2;
+	}
+
+	public LinkedList() {
+		this.head = null;
+	}
+
 	public void addAsFirstNode(E data) {
 		head = new Node<E>(data, head);
 		count++;
@@ -27,10 +35,10 @@ public class LinkedList<E extends Comparable<E>> {
 
 		Node<E> current = head;
 		while (current != null) {
-			System.out.println(current.data);
+			System.out.print(current.data + " ");
 			current = current.next;
 		}
-
+		System.out.println();
 	}
 
 	public int length() {
@@ -98,6 +106,22 @@ public class LinkedList<E extends Comparable<E>> {
 
 	}
 
+	public LinkedList<E> splitLists() {
+		Node<E> slow = head, fast = head;
+
+		while (fast != null && fast.next != null) {
+			fast = fast.next.next;
+			if (fast != null) {
+				slow = slow.next;
+			}
+		}
+		if (slow != null) {
+			fast = slow.next;
+			slow.next = null;
+		}
+		return new LinkedList<E>(fast);
+	}
+
 	public static void main(String[] args) {
 		LinkedList<Integer> ll = new LinkedList<>();
 		ll.addAsLastNode(7);
@@ -110,9 +134,10 @@ public class LinkedList<E extends Comparable<E>> {
 		ll.addNodePos(4, 0);
 		ll.addNodePos(5, 0);
 		ll.addNodePos(6, 1);
-		ll.print();
 		ll.deleteNodePos(4);
+		var l2 = ll.splitLists();
 		ll.print();
+		l2.print();
 	}
 }
 
