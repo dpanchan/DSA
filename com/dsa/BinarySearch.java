@@ -21,6 +21,9 @@ class BinarySearch {
 	}
 
 	public static void main(String[] args) {
+		// Integer[] arr = {1,2,3,4,5};
+		// int index = -57;
+
 		String[] arr = { "hello", "hai", "Namaskaram", "Vanakam" };
 		String index = "hai";
 		System.out.println(binarySearch(arr, index));
