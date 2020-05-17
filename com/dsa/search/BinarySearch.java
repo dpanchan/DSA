@@ -1,4 +1,4 @@
-package com.dsa;
+package com.dsa.search;
 
 class BinarySearch {
 

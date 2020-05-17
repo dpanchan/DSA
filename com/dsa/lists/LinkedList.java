@@ -1,11 +1,11 @@
-package com.dsa;
+package com.dsa.lists;
 
 public class LinkedList<E extends Comparable<E>> {
 
-	Node<E> head = null;
+	ListNode<E> head = null;
 	int count = 0;
 
-	public LinkedList(Node<E> head) {
+	public LinkedList(ListNode<E> head) {
 		this.head = head;
 	}
 
@@ -13,25 +13,25 @@ public class LinkedList<E extends Comparable<E>> {
 	}
 
 	public void addAsFirstNode(E data) {
-		this.head = new Node<>(data, head);
+		this.head = new ListNode<>(data, head);
 		count++;
 	}
 
 	public void addAsLastNode(E data) {
 		if (head == null) {
-			head = new Node<E>(data);
+			head = new ListNode<E>(data);
 		} else {
-			Node<E> current = head;
+			ListNode<E> current = head;
 			while (current.next != null) {
 				current = current.next;
 			}
-			current.next = new Node<>(data);
+			current.next = new ListNode<>(data);
 		}
 		count++;
 	}
 
 	public void print() {
-		Node<E> current = head;
+		ListNode<E> current = head;
 		while (current != null) {
 			System.out.print(current.data + " ");
 			current = current.next;
@@ -56,7 +56,7 @@ public class LinkedList<E extends Comparable<E>> {
 		} else if (head.next == null) {
 			head = null;
 		} else {
-			Node<E> current = head;
+			ListNode<E> current = head;
 			while (current.next.next != null) {
 				current = current.next;
 			}
@@ -77,21 +77,21 @@ public class LinkedList<E extends Comparable<E>> {
 		}
 		
 		if (pos == 0) {
-			head = new Node<E>(data, head);
+			head = new ListNode<E>(data, head);
 		} else {
-			Node<E> current = head;
+			ListNode<E> current = head;
 			int ps = 0;
 			while (++ps != pos && current.next != null) {
 				current = current.next;
 			}
-			Node<E> newNode = new Node<>(data, current.next);
+			ListNode<E> newNode = new ListNode<>(data, current.next);
 			current.next = newNode;
 		}
 		count++;
 	}
 
 	public void deleteNodeAtPos(int pos) {
-		Node<E> current = head;
+		ListNode<E> current = head;
 		if (pos == 0) {
 			head = head.next;
 		} else {
@@ -104,7 +104,7 @@ public class LinkedList<E extends Comparable<E>> {
 	}
 
 	public LinkedList<E> splitLists() {
-		Node<E> slow = head, fast = head;
+		ListNode<E> slow = head, fast = head;
 
 		while (fast != null && fast.next != null) {
 			fast = fast.next.next;
@@ -138,16 +138,3 @@ public class LinkedList<E extends Comparable<E>> {
 	}
 }
 
-class Node<E extends Comparable<E>> {
-	public final E data;
-	public Node<E> next;
-
-	public Node(E data, Node<E> next) {
-		this.data = data;
-		this.next = next;
-	}
-
-	public Node(E data) {
-		this(data, null);
-	}
-}
