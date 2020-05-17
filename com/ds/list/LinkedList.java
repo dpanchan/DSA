@@ -1,4 +1,4 @@
-package com.dsa.lists;
+package com.dsa.list;
 
 public class LinkedList<E extends Comparable<E>> {
 

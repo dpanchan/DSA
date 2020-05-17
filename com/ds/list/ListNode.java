@@ -1,4 +1,4 @@
-package com.dsa.lists;
+package com.dsa.list;
 
 public class ListNode<E extends Comparable<E>> {
     public final E data;
