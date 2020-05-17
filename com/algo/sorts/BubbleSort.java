@@ -1,20 +1,15 @@
 package com.algo.sorts;
 
-
 import java.util.Arrays;
 
 class BubbleSort {
-
     public static void main(String[] args) {
-
         int[] arr = {1, 4, 5, 2, -1};
         bubbleSort(arr);
         System.out.println(Arrays.toString(arr));
-
     }
 
     public static void bubbleSort(int[] arr) {
-
         boolean flag = true;
         while(flag){
             flag = false;
