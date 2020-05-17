@@ -1,15 +1,12 @@
 package com.dsa;
 
-public class LinkedList<E extends Comparable<E>> {
+public class Linkedlist<E extends Comparable<E>> {
 
 	Node<E> head = null;
 	int count = 0;
 
-	public LinkedList(Node<E> head) {
+	public Linkedlist(Node<E> head) {
 		this.head = head;
-	}
-
-	public LinkedList() {
 	}
 
 	public void addAsFirstNode(E data) {
@@ -103,7 +100,7 @@ public class LinkedList<E extends Comparable<E>> {
 		}
 	}
 
-	public LinkedList<E> splitLists() {
+	public Linkedlist<E> splitLists() {
 		Node<E> slow = head, fast = head;
 
 		while (fast != null && fast.next != null) {
@@ -116,25 +113,78 @@ public class LinkedList<E extends Comparable<E>> {
 			fast = slow.next;
 			slow.next = null;
 		}
-		return new LinkedList<E>(fast);
+		return new Linkedlist<E>(fast);
+	}
+	
+	public static <E extends Comparable<E>> void mergeLists(Linkedlist<E> ll1,Linkedlist<E> ll2 ) {
+		
+		Node<E> dummy = new Node<>(null);
+		Node<E> l3 = dummy;
+		Node<E> l1 = ll1.head;
+		Node<E> l2 = ll2.head;
+		
+		while(l1 != null && l2 != null) {
+			if(l1.data.compareTo(l2.data) < 0) {
+				l3.next = l1;
+				l1 = l1.next;
+			}		
+			else {
+				l3.next = l2;
+				l2 = l2.next;
+			}
+			l3 = l3.next;
+		}
+		if(l1 != null) {
+			l3.next = l1;
+		}
+		if(l2 != null) {
+			l3.next = l2;
+		}
+		
+		ll1.head = dummy.next;
+		ll2.head = null;
 	}
 
+	public void mergeSort() {
+		Linkedlist<E> l1 = this;
+		
+		if(l1.head == null) {return;}
+		if(l1.head.next == null) {return;}
+		
+		var l2 = l1.splitLists();
+		l1.mergeSort();
+		l2.mergeSort();
+		mergeLists(l1,l2);
+	
+	}
+	
 	public static void main(String[] args) {
-		LinkedList<Integer> ll = new LinkedList<>();
-		ll.addAsLastNode(7);
-		ll.addAsLastNode(6);
-		ll.addAsFirstNode(5);
-		ll.addAsFirstNode(9);
-		ll.deleteFirstNode();
-		ll.deleteLastNode();
-		ll.addNodeAtPos(3, 0);
-		ll.addNodeAtPos(4, 0);
-		ll.addNodeAtPos(5, 0);
-		ll.addNodeAtPos(6, 1);
-		ll.deleteNodeAtPos(4);
-		var l2 = ll.splitLists();
-		ll.print();
-		l2.print();
+//		Linkedlist<Integer> ll = new Linkedlist<>();
+//		ll.addAsLastNode(7);
+//		ll.addAsLastNode(6);
+//		ll.addAsFirstNode(5);
+//		ll.addAsFirstNode(9);
+//		ll.deleteFirstNode();
+//		ll.deleteLastNode();
+//		ll.addNodeAtPos(3, 0);
+//		ll.addNodeAtPos(4, 0);
+//		ll.addNodeAtPos(5, 0);
+//		ll.addNodeAtPos(6, 1);
+//		ll.deleteNodeAtPos(4);
+//		var l2 = ll.splitLists();
+//		ll.print();
+//		l2.print();
+
+		var l3 = new Linkedlist<>(new Node<>(3,
+				new Node<>(5,
+						new Node<>(7))));
+		var l4 = new Linkedlist<>(new Node<>(1,
+				new Node<>(2,
+						new Node<>(8))));
+		mergeLists(l3, l4);
+		l3.print();
+		l3.mergeSort();
+		l3.print();
 	}
 }
 
