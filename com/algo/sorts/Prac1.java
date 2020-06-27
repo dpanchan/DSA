@@ -3,14 +3,33 @@ import java.util.Arrays;
 import java.util.List;
 
 class Prac1 {
+    public static int[] arr = {129, 39, -2, 800, 54};
+    public static int n = arr.length;
     public static void main(String[] args) {
-        int[] arr = {129, 39, 2, 800, 54};
-        radixSort(arr);
+        count(arr);
         System.out.println(Arrays.toString(arr));
     }
 
+    private static void count(int[] arr) {
+        int minVal = Integer.MAX_VALUE, maxVal = Integer.MIN_VALUE;
+        for(int element : arr){
+            if(element > maxVal) {
+                maxVal = element;
+            }if(element < minVal) {
+                minVal = element;
+            }
+        }
+        int[] countArray = new int[maxVal - minVal + 1];
+        for(int element : arr){
+            countArray[element - minVal] += 1 ;
+        }
+        for(int i =0, j=0; i < countArray.length;i++){
+            for (int k=0; k < countArray[i];k++){
+                arr[j++] = i + minVal;
+            }
+        }
+    }
     private static void radixSort(int[] arr) {
-        int n = arr.length;
         List<Integer>[] buckets = new ArrayList[10];//10 because 10 slots
         for (int i = 0; i < 10; i++) {
             buckets[i] = new ArrayList<>();
@@ -34,7 +53,7 @@ class Prac1 {
         }
     }
     private static void quick(int[] arr) {
-        quickSort(arr, 0, arr.length-1);
+        quickSort(arr, 0, n-1);
     }
     private static void quickSort(int[] arr, int less, int great) {
         if(less >= great) {
@@ -60,24 +79,23 @@ class Prac1 {
         quickSort(arr,r+1, great);
     }
     private static void bubble(int[] arr) {
-
         boolean swapped = true;
         while (swapped) {
             swapped = false;
-            for (int i = 0; i < arr.length-1; i++) {
+            for (int i = 0; i < n-1; i++) {
                 if (arr[i] > arr[i + 1]) {
                     int tmp = arr[i];
                     arr[i] = arr[i + 1];
-                    arr[i + 1] = tmp;
+                    arr[i+1] = tmp;
                     swapped = true;
                 }
             }
         }
     }
     private static void selection(int[] arr){
-        for(int i =0;i<arr.length;i++){
+        for(int i =0;i<n;i++){
             int key = i;
-            for(int j = i+1; j< arr.length;j++){
+            for(int j = i+1; j<n;j++){
                 if(arr[j] < arr[key]){
                     key = j;
                 }
@@ -88,18 +106,16 @@ class Prac1 {
         }
     }
     private static void insertion(int[] arr){
-        for(int i = 1; i<arr.length;i++){
+        for(int i = 1; i<n;i++){
             int val = arr[i];
             int j = i-1;
             while(j>=0 && arr[j] > val){
-                arr[j+1] = arr[j];
-                j--;
+                arr[j+1] = arr[j--];
             }
             arr[j+1] =val;
         }
     }
     private static void merger(int[] arr){
-        int n = arr.length;
         if(n < 2){ return; }
         int mid = n /2 ;
         int[] less = new int[mid];
@@ -115,13 +131,17 @@ class Prac1 {
         while(i < less.length && j < great.length){
             if(less[i] < great[j]){
                 arr[k++] = less[i++];
-            } else{
+            }
+            else{
                 arr[k++] = great[j++];
             }
-        } while(i < less.length ){
+        }
+        while(i < less.length ){
             arr[k++] = less[i++];
-        } while(j < great.length){
+        }
+        while(j < great.length){
             arr[k++] = great[j++];
         }
     }
+
 }
