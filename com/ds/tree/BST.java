@@ -1,15 +1,6 @@
-//
-//public class BinarySearchTree {
-//
-//	public static void main(String[] args) {
-//
-//
-//	}
-//
-//}
-//
-//class Node<E>{
-//
-//
-//
-//}
+class BST{
+
+    public static void main(String[] args) {
+
+    }
+}
