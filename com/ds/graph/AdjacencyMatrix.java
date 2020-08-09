@@ -1,24 +1,29 @@
 package com.ds.graph;
-import java.util.ArrayList;
+import java.util.Arrays;
 
-public class AdjacencyList {
+public class AdjacencyMatrix {
     public static void main(String[] args) {
-        int vertices = 7;
-        ArrayList<ArrayList<Integer>> adj = new ArrayList<>();
-        for(int i = 0; i<vertices;i++){
-            adj.add(new ArrayList<Integer>());
-        }
-        addEdge(adj,5,6);
-        for(int i= 0; i<adj.size();i++){
-            for(int j=0; j<adj.get(i).size();j++){
-                System.out.println(i + " connected with " + adj.get(i).get(j));
-            }
+        int vertices = 5;
+        var m = new int[vertices][vertices];
+
+        addEdgeMatrix(m, 0, 4);
+        addEdgeMatrix(m, 2, 4);
+        addEdgeMatrix(m, 3, 4);
+        addEdgeMatrix(m, 4, 1);
+
+        printMatrix(m);
+    }
+
+    private static void addEdgeMatrix(int[][] m, int i, int j) {
+        m[i][j] = 1;
+        m[j][i] = 1;
+    }
+
+    private static void printMatrix(int[][] adj) {
+        for (int i = 0; i < adj.length; i++) {
+            System.out.println(Arrays.toString(adj[i]));
         }
     }
 
-    private static void addEdge(ArrayList<ArrayList<Integer>> adj, int v1, int v2) {
-        adj.get(v1).add(v2);
-        adj.get(v2).add(v1);
-    }
 
 }
